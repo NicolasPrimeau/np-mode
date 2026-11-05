@@ -115,6 +115,14 @@ Every time you are asked to make a change follow:
 
 * Use the dryer tool to eliminate duplication that rank 0.8 or above.
 
+## Import Linter
+
+* Use import-linter (`lint-imports`) so dependencies point inward and features stay independent.
+* Declare the contracts in `[tool.importlinter]` in `pyproject.toml`: `layers` from the edges in to the domain,
+  `independence` for features, `forbidden` for anything else that must not be imported.
+* A broken contract is a failure: it exits 1 and names the import and its line. Fix the import, never the contract.
+* The root package must be importable (installed, or on `PYTHONPATH`).
+
 ## Mutation Testing
 
 * Use mutmut 3.

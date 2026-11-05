@@ -2,6 +2,7 @@
 
 `np-mode` is a fork of [unclebob/ub-mode](https://github.com/unclebob/ub-mode). It keeps ub-mode's principles and changes the tools where a faster or better one exists. What differs from ub-mode:
 
+- **Dependency direction is enforced with [import-linter](https://github.com/seddonym/import-linter)** instead of being viewed in uml-viewer: a broken layer or independence contract fails the build.
 - **Mutation testing in Python uses [mutmut 3](https://github.com/boxed/mutmut).** Each mutant runs only the tests that cover it, in a process forked from a warm parent, and only functions that changed since the last run are retested.
 
 The rest of this README is ub-mode's.
@@ -21,8 +22,8 @@ The rest of this README is ub-mode's.
 - [unclebob/crapper](https://github.com/unclebob/crapper) — Computes cyclomatic complexity, test coverage, and CRAP score per function so every function stays under the CRAP threshold (`< 10`).
 - [unclebob/dryer](https://github.com/unclebob/dryer) — Detects structural code duplication so duplicate blocks (`>= 0.8` similarity) are eliminated.
 - [boxed/mutmut](https://github.com/boxed/mutmut) — np-mode's mutation tester for Python, version 3 or later.
-- [unclebob/uml-viewer](https://github.com/unclebob/uml-viewer) — Visualizes components, coverage, CRAP, mutation scores, and dependency directions.
+- [seddonym/import-linter](https://github.com/seddonym/import-linter) — Fails the build when an import breaks a declared layer, independence or forbidden contract.
 
 ## Installation
 
-Copy `SKILL.md` into your agent's skills directory as `np-mode/SKILL.md` (for example `~/.claude/skills/np-mode/SKILL.md`), then invoke `/np-mode`. Install the tools it runs (crapper, dryer and mutmut) into the project's environment with `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`).
+Copy `SKILL.md` into your agent's skills directory as `np-mode/SKILL.md` (for example `~/.claude/skills/np-mode/SKILL.md`), then invoke `/np-mode`. Install the tools it runs (crapper, dryer, mutmut and import-linter) into the project's environment with `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`).
