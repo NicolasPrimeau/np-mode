@@ -1,4 +1,12 @@
-# ub-mode
+# np-mode
+
+`np-mode` is a fork of [unclebob/ub-mode](https://github.com/unclebob/ub-mode). It keeps ub-mode's principles and changes the tools where a faster or better one exists. What differs from ub-mode:
+
+- **Mutation testing in Python uses [mutmut 3](https://github.com/boxed/mutmut).** Each mutant runs only the tests that cover it, in a process forked from a warm parent, and only functions that changed since the last run are retested. Other languages still use [unclebob/mutator](https://github.com/unclebob/mutator).
+
+The rest of this README is ub-mode's.
+
+## ub-mode
 
 `ub-mode` is an agent skill that enforces disciplined software engineering principles when writing or changing code. It is loosely based on portions of [@poteto](https://github.com/poteto)'s rules (`poteto-mode` / `pstack`), reduced and paired with deterministic quality-gate tools:
 
@@ -13,8 +21,9 @@
 - [unclebob/crapper](https://github.com/unclebob/crapper) — Computes cyclomatic complexity, test coverage, and CRAP score per function so every function stays under the CRAP threshold (`< 10`).
 - [unclebob/dryer](https://github.com/unclebob/dryer) — Detects structural code duplication so duplicate blocks (`>= 0.8` similarity) are eliminated.
 - [unclebob/mutator](https://github.com/unclebob/mutator) — Runs mutation testing to expose uncovered code and surviving mutants that tests fail to catch.
+- [boxed/mutmut](https://github.com/boxed/mutmut) — np-mode's mutation tester for Python, version 3 or later.
 - [unclebob/uml-viewer](https://github.com/unclebob/uml-viewer) — Visualizes components, coverage, CRAP, mutation scores, and dependency directions.
 
 ## Installation
 
-Copy `SKILL.md` into your agent's skills directory as `ub-mode/SKILL.md` (for example `~/.grok/skills/ub-mode/SKILL.md`, `~/.claude/skills/ub-mode/SKILL.md`, or `~/.cursor/skills/ub-mode/SKILL.md`), then invoke `/ub-mode`.
+Copy `SKILL.md` into your agent's skills directory as `np-mode/SKILL.md` (for example `~/.claude/skills/np-mode/SKILL.md`), then invoke `/np-mode`. For Python projects, install mutmut 3 in the project's environment (`uv add --dev mutmut` or `pip install mutmut`).

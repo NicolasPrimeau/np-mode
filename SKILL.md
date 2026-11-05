@@ -1,12 +1,12 @@
 ---
-name: ub-mode
+name: np-mode
 description: >
   Follow the reduced principles when writing or changing code. Every change
   follows First Make it Work, then Then Make it Right, then Follow Practice.
-  Use when the user runs /ub-mode or asks for the reduced principles.
+  Use when the user runs /np-mode or asks for the reduced principles.
 ---
 
-# ub-mode
+# np-mode
 
 Every time you are asked to make a change follow:
 * First Make it Work.
@@ -115,12 +115,20 @@ Every time you are asked to make a change follow:
 
 * Use the dryer tool to eliminate duplication that rank 0.8 or above.
 
-## Mutator
+## Mutation Testing
 
-* Use the mutator tool
+* Python: use mutmut 3. Every other language: use the mutator tool.
 * Cover the uncovered.
 * Kill the survivors.
 * Delete dead code.
+
+### mutmut (Python)
+
+* Configure `[tool.mutmut] source_paths` in `pyproject.toml`. Ignore `mutants/` in git.
+* Run the functions you changed: `mutmut run "pkg.module.x_function*"`, with names as `mutmut results --all true` prints them.
+* `mutmut run` exits 0 when mutants survive. Run `mutmut export-cicd-stats`, then read `mutants/mutmut-cicd-stats.json`: `survived` and `no_tests` must be 0.
+* `no_tests` is the uncovered. `mutmut show <mutant>` prints a survivor's diff. `mutmut tests-for-mutant <mutant>` names the tests that ran it.
+* It needs pytest and `fork` (Linux, macOS, WSL). Without them, use the mutator tool.
 
 ## Refactoring
 
