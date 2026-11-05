@@ -1,5 +1,12 @@
 # Tools the np-mode skill runs. Install them into the project's environment:
 #   pip install -r requirements.txt
+# A project started from template/ gets the same tools from its dev dependency group.
+ruff>=0.17
+mypy>=2.4
+pip-audit>=2.10
+pre-commit>=4
+pytest>=9
+pytest-cov>=7
 crapper @ git+https://github.com/unclebob/crapper
 dryer @ git+https://github.com/unclebob/dryer
 mutmut>=3.8

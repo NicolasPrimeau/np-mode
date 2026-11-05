@@ -105,6 +105,17 @@ Every time you are asked to make a change follow:
 * The test calls the code the way its user does and checks the result that user would see.
 * If the test would still pass when every function returned nothing, throw it out.
 
+## Lint, Types and Audit
+
+* A new Python project starts from `template/`: `pyproject.toml`, `.pre-commit-config.yaml` and `.gitignore`.
+  Rename `pkg`, then run `uv sync` and `pre-commit install --hook-type pre-commit --hook-type pre-push`.
+* `ruff check` and `ruff format`: the template's rule set enforces types on every signature (`ANN`), no print
+  (`T20`), no commented-out code (`ERA`), security (`S`), complexity 10 (`C90`) and bug patterns (`B`, `PL`).
+* `mypy --strict`. Fix the type, never add `# type: ignore` or `Any` to silence it.
+* `pip-audit` on every push: a known vulnerability in a dependency is a failure. Upgrade the dependency.
+* Hooks run tools through `uv run`, so the locked versions run, the same ones CI runs.
+* Do not loosen a rule to pass. A per-line `# noqa: <code>` needs a comment saying why.
+
 ## Crapper
 
 * Use the crapper tool
