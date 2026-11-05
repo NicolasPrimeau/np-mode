@@ -117,7 +117,7 @@ Every time you are asked to make a change follow:
 
 ## Mutation Testing
 
-* Python: use mutmut 3. Every other language: use the mutator tool.
+* Use mutmut 3.
 * Cover the uncovered.
 * Kill the survivors.
 * Delete dead code.
@@ -128,7 +128,7 @@ Every time you are asked to make a change follow:
 * Run the functions you changed: `mutmut run "pkg.module.x_function*"`, with names as `mutmut results --all true` prints them.
 * `mutmut run` exits 0 when mutants survive. Run `mutmut export-cicd-stats`, then read `mutants/mutmut-cicd-stats.json`: `survived` and `no_tests` must be 0.
 * `no_tests` is the uncovered. `mutmut show <mutant>` prints a survivor's diff. `mutmut tests-for-mutant <mutant>` names the tests that ran it.
-* It needs pytest and `fork` (Linux, macOS, WSL). Without them, use the mutator tool.
+* It needs pytest and `fork` (Linux, macOS, WSL).
 
 ## Refactoring
 
