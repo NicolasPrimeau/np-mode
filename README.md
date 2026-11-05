@@ -25,4 +25,4 @@ The rest of this README is ub-mode's.
 
 ## Installation
 
-Copy `SKILL.md` into your agent's skills directory as `np-mode/SKILL.md` (for example `~/.claude/skills/np-mode/SKILL.md`), then invoke `/np-mode`. For Python projects, install mutmut 3 in the project's environment (`uv add --dev mutmut` or `pip install mutmut`).
+Copy `SKILL.md` into your agent's skills directory as `np-mode/SKILL.md` (for example `~/.claude/skills/np-mode/SKILL.md`), then invoke `/np-mode`. Install the tools it runs (crapper, dryer and mutmut) into the project's environment with `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`).
