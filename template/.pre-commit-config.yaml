@@ -53,10 +53,11 @@ repos:
         pass_filenames: false
       # Slower or networked checks run once per push, on what is about to leave the machine.
       # Random order (pytest-randomly) exposes tests that depend on each other. Every line
-      # the push changes must be covered: diff-cover compares against origin/main.
+      # the push changes must be covered: diff-cover compares against origin/main. Coverage comes
+      # from slipcover, which adds almost nothing to the test run (coverage.py added 42-71%).
       - id: pytest
         name: tests, and coverage of changed lines
-        entry: bash -c 'uv run pytest -q --cov --cov-report=xml && uv run diff-cover coverage.xml --compare-branch=origin/main --fail-under=100'
+        entry: bash -c 'uv run python -m slipcover --source src --xml --out coverage.xml -m pytest -q && uv run diff-cover coverage.xml --compare-branch=origin/main --fail-under=100'
         language: system
         pass_filenames: false
         always_run: true

@@ -11,7 +11,7 @@ dev = [
   "ruff>=0.17",
   "mypy>=2.4",
   "pytest>=9",
-  "pytest-cov>=7",
+  "slipcover>=1.0",
   "pytest-randomly>=3",
   "pytest-timeout>=2",
   "hypothesis>=6",
@@ -63,12 +63,12 @@ files = ["src", "tests"]
 testpaths = ["tests"]
 addopts = ["--strict-markers", "--strict-config", "-ra"]
 xfail_strict = true
-filterwarnings = ["error"]
+filterwarnings = [
+  "error",
+  # slipcover runs pytest, so it is imported before pytest can rewrite its asserts. Harmless.
+  "ignore:Module already imported so cannot be rewritten; slipcover:pytest.PytestAssertRewriteWarning",
+]
 timeout = 60  # pytest-timeout: a hung test fails instead of blocking the run
-
-[tool.coverage.run]
-source = ["src"]
-core = "sysmon"  # far less overhead than the default tracer; it measures lines, not branches, before 3.14
 
 [tool.vulture]
 # Run by hand, not as a hook: framework callbacks (routes, handlers) look unused at 60%.

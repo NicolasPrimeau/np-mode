@@ -117,7 +117,8 @@ Every time you are asked to make a change follow:
 * Hooks run tools through `uv run`, so the locked versions run, the same ones CI runs.
 * Tests run in random order (pytest-randomly) with a 60 s timeout (pytest-timeout). A test that fails only in
   some orders depends on another test: fix the shared state, never pin the order.
-* Every line a push changes must be covered: the pre-push hook runs `diff-cover` against `origin/main` at 100%.
+* Every line a push changes must be covered: the pre-push hook measures coverage with slipcover (near-zero
+  overhead) and runs `diff-cover` against `origin/main` at 100%.
 * `deptry .` checks declared dependencies against imports: a package you import must be declared, not transitive.
 * For dead code, run `vulture` and delete what is truly unused. Check each finding: a route or handler registered
   by a decorator looks unused.
