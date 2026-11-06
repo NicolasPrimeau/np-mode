@@ -15,7 +15,6 @@ dev = [
   "pip-audit>=2.10",
   "pre-commit>=4",
   "import-linter>=2",
-  "mutmut>=3.8",
   "crapper @ git+https://github.com/unclebob/crapper",
   "dryer @ git+https://github.com/unclebob/dryer",
 ]
@@ -67,6 +66,3 @@ root_package = "pkg"
 name = "Dependencies point inward"
 type = "layers"
 layers = ["pkg.cli", "pkg.domain"]
-
-[tool.mutmut]
-source_paths = ["src/pkg"]

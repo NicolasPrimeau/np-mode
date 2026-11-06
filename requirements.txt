@@ -9,5 +9,4 @@ pytest>=9
 pytest-cov>=7
 crapper @ git+https://github.com/unclebob/crapper
 dryer @ git+https://github.com/unclebob/dryer
-mutmut>=3.8
 import-linter>=2.0

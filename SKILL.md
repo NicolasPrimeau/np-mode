@@ -134,21 +134,6 @@ Every time you are asked to make a change follow:
 * A broken contract is a failure: it exits 1 and names the import and its line. Fix the import, never the contract.
 * The root package must be importable (installed, or on `PYTHONPATH`).
 
-## Mutation Testing
-
-* Use mutmut 3.
-* Cover the uncovered.
-* Kill the survivors.
-* Delete dead code.
-
-### mutmut (Python)
-
-* Configure `[tool.mutmut] source_paths` in `pyproject.toml`. Ignore `mutants/` in git.
-* Run the functions you changed: `mutmut run "pkg.module.x_function*"`, with names as `mutmut results --all true` prints them.
-* `mutmut run` exits 0 when mutants survive. Run `mutmut export-cicd-stats`, then read `mutants/mutmut-cicd-stats.json`: `survived` and `no_tests` must be 0.
-* `no_tests` is the uncovered. `mutmut show <mutant>` prints a survivor's diff. `mutmut tests-for-mutant <mutant>` names the tests that ran it.
-* It needs pytest and `fork` (Linux, macOS, WSL).
-
 ## Refactoring
 
 * Pin what the code does.
