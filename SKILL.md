@@ -32,6 +32,7 @@ Every time you are asked to make a change follow:
 * See it fail for the reason you expect.
 * Make the smallest change that makes it pass.
 * If an honest test is impractical, do not write a bad one.
+* For a rule over many inputs (parsers, money, ranges), write a Hypothesis property test.
 
 ## Redesign From First Principles
 
@@ -105,7 +106,7 @@ Every time you are asked to make a change follow:
 * The test calls the code the way its user does and checks the result that user would see.
 * If the test would still pass when every function returned nothing, throw it out.
 
-## Lint, Types and Audit
+## Lint, Types, Tests and Audit
 
 * A new Python project starts from `template/`: `pyproject.toml`, `.pre-commit-config.yaml` and `.gitignore`.
   Rename `pkg`, then run `uv sync` and `pre-commit install --hook-type pre-commit --hook-type pre-push`.
@@ -114,6 +115,12 @@ Every time you are asked to make a change follow:
 * `mypy --strict`. Fix the type, never add `# type: ignore` or `Any` to silence it.
 * `pip-audit` on every push: a known vulnerability in a dependency is a failure. Upgrade the dependency.
 * Hooks run tools through `uv run`, so the locked versions run, the same ones CI runs.
+* Tests run in random order (pytest-randomly) with a 60 s timeout (pytest-timeout). A test that fails only in
+  some orders depends on another test: fix the shared state, never pin the order.
+* Every line a push changes must be covered: the pre-push hook runs `diff-cover` against `origin/main` at 100%.
+* `deptry .` checks declared dependencies against imports: a package you import must be declared, not transitive.
+* For dead code, run `vulture` and delete what is truly unused. Check each finding: a route or handler registered
+  by a decorator looks unused.
 * Do not loosen a rule to pass. A per-line `# noqa: <code>` needs a comment saying why.
 
 ## Crapper

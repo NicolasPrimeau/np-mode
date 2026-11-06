@@ -39,6 +39,12 @@ repos:
         language: system
         types_or: [python, pyi]
         pass_filenames: false
+      - id: deptry
+        name: declared dependencies match imports
+        entry: uv run deptry .
+        language: system
+        types_or: [python, toml]
+        pass_filenames: false
       - id: import-linter
         name: import contracts
         entry: uv run lint-imports
@@ -46,9 +52,11 @@ repos:
         types_or: [python, pyi, toml]
         pass_filenames: false
       # Slower or networked checks run once per push, on what is about to leave the machine.
+      # Random order (pytest-randomly) exposes tests that depend on each other. Every line
+      # the push changes must be covered: diff-cover compares against origin/main.
       - id: pytest
-        name: tests
-        entry: uv run pytest -q
+        name: tests, and coverage of changed lines
+        entry: bash -c 'uv run pytest -q --cov --cov-report=xml && uv run diff-cover coverage.xml --compare-branch=origin/main --fail-under=100'
         language: system
         pass_filenames: false
         always_run: true

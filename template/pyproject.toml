@@ -12,6 +12,12 @@ dev = [
   "mypy>=2.4",
   "pytest>=9",
   "pytest-cov>=7",
+  "pytest-randomly>=3",
+  "pytest-timeout>=2",
+  "hypothesis>=6",
+  "diff-cover>=9",
+  "vulture>=2",
+  "deptry>=0.23",
   "pip-audit>=2.10",
   "pre-commit>=4",
   "import-linter>=2",
@@ -58,6 +64,19 @@ testpaths = ["tests"]
 addopts = ["--strict-markers", "--strict-config", "-ra"]
 xfail_strict = true
 filterwarnings = ["error"]
+timeout = 60  # pytest-timeout: a hung test fails instead of blocking the run
+
+[tool.coverage.run]
+source = ["src"]
+core = "sysmon"  # far less overhead than the default tracer; it measures lines, not branches, before 3.14
+
+[tool.vulture]
+# Run by hand, not as a hook: framework callbacks (routes, handlers) look unused at 60%.
+paths = ["src"]  # not tests: fixtures requested only for their side effect look unused
+min_confidence = 60
+
+[tool.deptry]
+known_first_party = ["pkg"]
 
 [tool.importlinter]
 root_package = "pkg"
