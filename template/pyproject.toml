@@ -22,7 +22,7 @@ dev = [
   "pre-commit>=4",
   "import-linter>=2",
   "crapper @ git+https://github.com/unclebob/crapper",
-  "dryer @ git+https://github.com/unclebob/dryer",
+  "dryer @ git+https://github.com/NicolasPrimeau/dryer",
 ]
 
 [build-system]

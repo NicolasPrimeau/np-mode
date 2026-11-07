@@ -14,5 +14,5 @@ diff-cover>=9
 vulture>=2
 deptry>=0.23
 crapper @ git+https://github.com/unclebob/crapper
-dryer @ git+https://github.com/unclebob/dryer
+dryer @ git+https://github.com/NicolasPrimeau/dryer
 import-linter>=2.0
